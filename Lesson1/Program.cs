@@ -20,10 +20,10 @@ namespace Lesson1
 
         public static void OperationAndNumbers(string str)
         {
-            string[] arrayNum = str.Split(new char[] {'+', '-', '*', '/', '(', ')'},StringSplitOptions.RemoveEmptyEntries);
+            char[] testOperations = { '+', '-', '*', '/', '(', ')' };
+            string[] arrayNum = str.Split(testOperations,StringSplitOptions.RemoveEmptyEntries);
             List<double> numbers = new List<double>();
             List<Char> operation = new List<Char>();
-            char[] testOperations = {'+', '-', '*', '/', '(', ')'};
             foreach(string num in arrayNum)
             {
                 numbers.Add(Convert.ToDouble(num));
