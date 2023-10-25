@@ -1,0 +1,7 @@
+C:\Users\artem\source\repos\Lesson1\Lesson1\bin\Debug\Lesson1.exe.config
+C:\Users\artem\source\repos\Lesson1\Lesson1\bin\Debug\Lesson1.exe
+C:\Users\artem\source\repos\Lesson1\Lesson1\bin\Debug\Lesson1.pdb
+C:\Users\artem\source\repos\Lesson1\Lesson1\obj\Debug\Lesson1.csproj.AssemblyReference.cache
+C:\Users\artem\source\repos\Lesson1\Lesson1\obj\Debug\Lesson1.csproj.CoreCompileInputs.cache
+C:\Users\artem\source\repos\Lesson1\Lesson1\obj\Debug\Lesson1.exe
+C:\Users\artem\source\repos\Lesson1\Lesson1\obj\Debug\Lesson1.pdb
