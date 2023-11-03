@@ -14,38 +14,11 @@ namespace Lesson1
             Console.Write("Введите выражение: ");
             string str = Console.ReadLine();
             str = str.Replace(" ",string.Empty);
-            var expression = OperationAndNumbers(str);
-            var prn = PRN(expression);
+            var prn = PRN(str);
             Console.WriteLine(string.Join(" ", prn));
-
         }
 
-        public static List<object> OperationAndNumbers(string str)
-        {
-            char[] testOperations = { '+', '-', '*', '/', '(', ')' };
-            List<object> expression = new List<object>();
-            string num = string.Empty;
-            for (int i = 0; i < str.Length; i++)
-            {
-                if (testOperations.Contains(str[i]))
-                {
-                    if (num != string.Empty)
-                    {
-                        expression.Add(num);
-                        num = string.Empty;
-                    }
-                    expression.Add(str[i]);
-                }
-                else
-                {
-                    num += str[i];
-                }
-            }
-            expression.Add(num);
-            return expression;
-        }
-
-        public static List<object> PRN(List<object> expression) 
+        public static List<object> PRN(string str) 
         {
             Dictionary<object, int> prioretyDictionary = new Dictionary<object, int>
             {
@@ -58,11 +31,18 @@ namespace Lesson1
             };
             List<object> prn = new List<object>();
             Stack<object> stack = new Stack<object>();
-            foreach (var item in expression)
+            string num = string.Empty;
+            for (int i = 0; i < str.Length; i++)
             {
-                if (prioretyDictionary.ContainsKey(item))
+                if (prioretyDictionary.ContainsKey(str[i]))
                 {
-                    if ((Char)item == ')')
+                    if (num != string.Empty)
+                    {
+                        prn.Add(num);
+                        num = string.Empty;
+                    }
+
+                    if (str[i] == ')')
                     {
                         while ((Char)stack.Peek() != '(')
                         {
@@ -71,32 +51,32 @@ namespace Lesson1
                         stack.Pop();
                     }
                     else if (stack.Count == 0
-                        || (Char)item == '('
-                        || prioretyDictionary[item] > prioretyDictionary[stack.Peek()])
+                        || str[i] == '('
+                        || prioretyDictionary[str[i]] > prioretyDictionary[stack.Peek()])
                     {
-                        stack.Push(item);
+                        stack.Push(str[i]);
                     }
-                    else if (prioretyDictionary[item] <= prioretyDictionary[stack.Peek()])
+                    else if (prioretyDictionary[str[i]] <= prioretyDictionary[stack.Peek()])
                     {
                         while (stack.Count > 0)
                         {
                             prn.Add(stack.Pop());
                         }
-                        stack.Push(item);
+                        stack.Push(str[i]);
                     }
                 }
                 else
                 {
-                    prn.Add(item);
+                    num += str[i];
                 }
+            }
+            if(num.Length != 0)
+            {
+                prn.Add(num);
             }
             while (stack.Count > 0)
             {
                 prn.Add(stack.Pop());
-            }
-            while(prn.Contains(string.Empty))
-            {
-                prn.Remove(string.Empty);
             }
             return prn;
         }
