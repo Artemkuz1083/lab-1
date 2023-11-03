@@ -15,7 +15,10 @@ namespace Lesson1
             string str = Console.ReadLine();
             str = str.Replace(" ",string.Empty);
             var prn = PRN(str);
+            Console.Write("ОПЗ: ");
             Console.WriteLine(string.Join(" ", prn));
+            Console.Write("Значение: ");
+            Console.WriteLine(string.Join(" ", Result(prn)));
         }
 
         public static List<object> PRN(string str) 
@@ -80,8 +83,26 @@ namespace Lesson1
             }
             return prn;
         }
-
-        public static double Calculate(int op, double first, double second)
+        public static Stack<double> Result(List<object> expression)
+        {
+            Stack<double> stack = new Stack<double>();
+            for (var i =0; i < expression.Count; i++)
+            {
+                if (expression[i] is string)
+                {
+                    double num = Convert.ToDouble(expression[i]);
+                    stack.Push(num);
+                }
+                else
+                {
+                    var second = stack.Pop();
+                    var first = stack.Pop();
+                    stack.Push(Calculate((Char)expression[i], first, second));
+                }
+            }
+            return stack;
+        }
+        public static double Calculate(Char op, double first, double second)
         {
             switch (op)
             {
