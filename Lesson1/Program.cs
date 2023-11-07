@@ -61,7 +61,7 @@ namespace Lesson1
                     }
                     else if (prioretyDictionary[str[i]] <= prioretyDictionary[stack.Peek()])
                     {
-                        while (stack.Count > 0)
+                        while (stack.Count > 0 && (Char)stack.Peek() != '(')
                         {
                             prn.Add(stack.Pop());
                         }
