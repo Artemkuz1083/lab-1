@@ -73,16 +73,14 @@ namespace Lesson1
                     num += str[i];
                 }
             }
-            if(num.Length != 0)
-            {
-                prn.Add(num);
-            }
+            prn.Add(num);
             while (stack.Count > 0)
             {
                 prn.Add(stack.Pop());
             }
             return prn;
         }
+
         public static Stack<double> Result(List<object> expression)
         {
             Stack<double> stack = new Stack<double>();
@@ -102,6 +100,7 @@ namespace Lesson1
             }
             return stack;
         }
+
         public static double Calculate(Char op, double first, double second)
         {
             switch (op)
