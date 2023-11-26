@@ -50,11 +50,11 @@ namespace Lesson1
         }
     }
 
-    class Brackets : Token
+    class Parenthesis : Token
     {
         public char Symbol;
         public bool IsClosing;
-        public Brackets(char symbol)
+        public Parenthesis(char symbol)
         {
             if (symbol != '(' && symbol != ')')
                 throw new ArgumentException("This is not valid bracket");
@@ -83,7 +83,7 @@ namespace Lesson1
             string num = string.Empty;
             for(int i = 0; i < str.Length; i++)
             {
-                if (char.IsDigit(str[i]))
+                if (char.IsDigit(str[i]) || str[i] == ',')
                 {
                     num += str[i];
                 }
@@ -103,7 +103,7 @@ namespace Lesson1
                         tokens.Add(new Number(double.Parse(num)));
                         num = string.Empty;
                     }
-                    tokens.Add(new Brackets(str[i]));
+                    tokens.Add(new Parenthesis(str[i]));
                 }
             }
             if (num != string.Empty)
@@ -128,7 +128,7 @@ namespace Lesson1
                 }
                 if (token is Operation)
                 {
-                    if (stack.Peek() is Brackets)
+                    if (stack.Peek() is Parenthesis)
                     {
                         stack.Push(token);
                         continue;
@@ -142,18 +142,18 @@ namespace Lesson1
                     }
                     else if (oper.Priorety <= oper2.Priorety)
                     {
-                        while (stack.Count > 0 && !(token is Brackets))
+                        while (stack.Count > 0 && !(token is Parenthesis))
                         {
                             prn.Add(stack.Pop());
                         }
                         stack.Push(token);
                     }
                 }
-                else if (token is Brackets)
+                else if (token is Parenthesis)
                 {
-                    if (((Brackets)token).IsClosing)
+                    if (((Parenthesis)token).IsClosing)
                     {
-                        while (!(stack.Peek() is Brackets))
+                        while (!(stack.Peek() is Parenthesis))
                         {
                             prn.Add(stack.Pop());
                         }
